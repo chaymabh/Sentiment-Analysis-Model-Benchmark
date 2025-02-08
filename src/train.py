@@ -63,21 +63,21 @@ def main():
     results = {}
     
     # Train Model 1
-    model1 = build_simple_dnn(input_dim)
-    history1 = model1.fit(X_train_tfidf, y_train,
+    simple_dnn_model = build_simple_dnn(input_dim)
+    history1 = simple_dnn_model.fit(X_train_tfidf, y_train,
                           validation_data=(X_val_tfidf, y_val),
                           epochs=20, batch_size=32)
-    plot_history(history1, "Simple DNN Performance", "model1_performance.png")
-    test_loss1, test_acc1 = model1.evaluate(X_test_tfidf, y_test)
+    plot_history(history1, "Simple DNN Performance", "simple_dnn_model_performance.png")
+    test_loss1, test_acc1 = simple_dnn_model.evaluate(X_test_tfidf, y_test)
     results["Simple DNN"] = {"Test Accuracy": test_acc1, "Test Loss": test_loss1}
     
     # Train Model 2
-    model2 = build_advanced_dnn(input_dim)
-    history2 = model2.fit(X_train_tfidf, y_train,
+    advanced_dnn_model = build_advanced_dnn(input_dim)
+    history2 = advanced_dnn_model.fit(X_train_tfidf, y_train,
                           validation_data=(X_val_tfidf, y_val),
                           epochs=20, batch_size=32)
-    plot_history(history2, "Advanced DNN Performance", "model2_performance.png")
-    test_loss2, test_acc2 = model2.evaluate(X_test_tfidf, y_test)
+    plot_history(history2, "Advanced DNN Performance", "advanced_dnn_model_performance.png")
+    test_loss2, test_acc2 = advanced_dnn_model.evaluate(X_test_tfidf, y_test)
     results["Advanced DNN"] = {"Test Accuracy": test_acc2, "Test Loss": test_loss2}
     
     # ---------------------
