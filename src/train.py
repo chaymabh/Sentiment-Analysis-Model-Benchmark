@@ -10,9 +10,9 @@ import matplotlib.pyplot as plt
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from tensorflow import keras
-from keras.optimizers import Adam
-from keras.losses import SparseCategoricalCrossentropy
-from keras.metrics import SparseCategoricalAccuracy
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.losses import SparseCategoricalCrossentropy
+from tensorflow.keras.metrics import SparseCategoricalAccuracy
 from transformers import BertTokenizer, TFBertForSequenceClassification
 
 # Import functions from our modules.
