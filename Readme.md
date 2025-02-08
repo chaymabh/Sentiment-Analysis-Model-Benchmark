@@ -117,12 +117,6 @@ In contrast, the **fine-tuned BERT** model leverages **transfer learning**, whic
 
 While both Simple DNN and Advanced DNN exhibit overfitting, **BERT** demonstrates superior performance due to its use of pre-trained contextual embeddings and more effective generalization. The **BERT model’s ability to learn from a broader understanding of language** allows it to avoid the severe overfitting seen in the DNN models, which tend to memorize the training data rather than learn generalized features. As a result, **BERT is the better model for sentiment analysis**, achieving better overall performance and generalization despite the overfitting observed in the DNN models.
 
-### Key Takeaways:
-
-- **BERT** consistently outperforms DNN models by leveraging pre-trained embeddings and transfer learning for better generalization.
-- **DNNs (Simple DNN & Advanced DNN)** exhibit overfitting, as seen in their high training accuracy and stagnant or declining validation accuracy and loss.
-- Regularization techniques such as dropout, L2 regularization, and early stopping can help mitigate overfitting in DNN models, but BERT’s transfer learning approach provides a more robust and scalable solution.
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
