@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import os
 import pandas as pd
@@ -7,6 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
+from transformers import BertTokenizer, TFBertForSequenceClassification
 import json
 
 # Import functions from our modules.
@@ -87,8 +86,8 @@ def main():
     val_df, test_df = train_test_split(temp_df, test_size=0.5, random_state=42)
     
     transformer_model_name = "bert-base-uncased"
-    tokenizer, bert_model = build_transformer_model(model_name=transformer_model_name, num_labels=2)
-    
+    tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+    bert_model = TFBertForSequenceClassification.from_pretrained("bert-base-uncased", num_labels=2)
     train_encodings = prepare_transformer_data(train_df['review'].tolist(), tokenizer)
     val_encodings = prepare_transformer_data(val_df['review'].tolist(), tokenizer)
     test_encodings = prepare_transformer_data(test_df['review'].tolist(), tokenizer)
@@ -106,7 +105,7 @@ def main():
     metric = tf.keras.metrics.SparseCategoricalAccuracy('accuracy')
     bert_model.compile(optimizer=optimizer, loss=loss, metrics=[metric])
     
-    history_bert = bert_model.fit(train_dataset, validation_data=val_dataset, epochs=20)
+    history_bert = bert_model.fit(train_dataset, validation_data=val_dataset, epochs=5)
     plot_history(history_bert, "BERT Model Performance", "bert_performance.png")
     
     test_loss_bert, test_acc_bert = bert_model.evaluate(test_dataset)

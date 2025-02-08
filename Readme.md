@@ -84,29 +84,44 @@ If the dataset CSV file is not already present in the `data/` folder, the traini
 - **Transformer (BERT) Model:**  
   Fine-tuned using raw text for **5 epochs**. Leverages pre-trained language representations to achieve superior performance.
 
-## Results & Discussion
+### Model Comparison: Fine-Tuned BERT vs. Deep Neural Networks (DNNs)
 
-The training script generates plots for each model that include:
+In comparing the simple DNN and the advanced DNN, we observe that both models exhibit signs of overfitting but in different ways. Overfitting occurs when a model performs exceptionally well on the training data but fails to generalize effectively to unseen validation data, as shown by the diverging training and validation accuracy and loss curves.
 
-- **Accuracy Curves:**  
-  Both training and validation accuracy are plotted over epochs.
+#### Overfitting Trends:
 
-  - **Observation:** The Advanced DNN model often shows improved convergence compared to the Simple DNN, indicating that additional layers and normalization help capture complex patterns in the data.
+- **Simple DNN** :
 
-- **Loss Curves:**  
-  Training and validation loss curves illustrate how quickly the models reduce error over time.
+  - **Accuracy**: The model shows an almost perfect training accuracy (~99%), while the validation accuracy plateaus around 88%. This large gap indicates that the model is memorizing the training data and not generalizing well to new data.
+  - **Loss**: The training loss decreases consistently, but the validation loss increases after the early epochs, further highlighting overfitting.
 
-  - **Observation:** A steeper drop in loss typically suggests a model that is learning effectively. The BERT model’s loss often decreases faster and to a lower value, which is common for transfer learning approaches with contextual embeddings.
+- **Advanced DNN** :
 
-- **Comparison Summary:**  
-  Along with plots, evaluation metrics (accuracy, precision, recall, F1-score) are printed for each model.
-  - **Observation:** The BERT model frequently outperforms both DNN models, highlighting the advantage of leveraging pre-trained language models for sentiment analysis.
+  - **Accuracy**: Similar to Simple DNN, Advanced DNN achieves near-perfect accuracy on the training data, but the validation accuracy stagnates at ~88%.
+  - **Loss**: While training loss decreases, validation loss starts increasing after the initial epochs, reflecting a similar pattern of overfitting as in Simple DNN.
 
-These visualizations and metrics help in understanding each model’s strengths and weaknesses, guiding future improvements and model selection based on the desired trade-offs between performance and computational cost.
+Both models demonstrate the common symptom of **overfitting**, where the model fits well to the training data but struggles to generalize to unseen data. The most likely causes include model complexity, insufficient regularization, or overtraining.
 
-## Conclusion
+#### BERT Model:
 
-This project provides a framework for benchmarking different sentiment analysis models. It shows how traditional machine learning methods (using TF-IDF and DNNs) compare to modern transfer learning techniques (using BERT). The repository serves as a starting point for further experimentation, including hyperparameter tuning and exploring additional architectures.
+In contrast, the **fine-tuned BERT** model leverages **transfer learning**, which is particularly effective for tasks like sentiment analysis. BERT, trained on a vast corpus of text, provides contextual embeddings that help the model understand the nuances of language, making it better equipped to generalize to unseen data compared to traditional DNNs.
+
+- **Training and Validation Curves**: The BERT model demonstrates faster convergence and a greater reduction in loss. Unlike the DNN models, BERT's loss continues to decrease to a lower value and maintains a more consistent gap between training and validation curves, suggesting less overfitting.
+
+- **Performance Metrics**:
+  - **Accuracy**: BERT outperforms both DNN models with higher accuracy in sentiment classification tasks.
+  - **Precision/Recall**: The precision and recall values for BERT are more balanced, as the model performs better in both identifying positive sentiment and avoiding false positives.
+  - **F1-Score**: BERT achieves a higher F1-score than both DNN models, indicating a better balance between precision and recall.
+
+#### Conclusion:
+
+While both Simple DNN and Advanced DNN exhibit overfitting, **BERT** demonstrates superior performance due to its use of pre-trained contextual embeddings and more effective generalization. The **BERT model’s ability to learn from a broader understanding of language** allows it to avoid the severe overfitting seen in the DNN models, which tend to memorize the training data rather than learn generalized features. As a result, **BERT is the better model for sentiment analysis**, achieving better overall performance and generalization despite the overfitting observed in the DNN models.
+
+### Key Takeaways:
+
+- **BERT** consistently outperforms DNN models by leveraging pre-trained embeddings and transfer learning for better generalization.
+- **DNNs (Simple DNN & Advanced DNN)** exhibit overfitting, as seen in their high training accuracy and stagnant or declining validation accuracy and loss.
+- Regularization techniques such as dropout, L2 regularization, and early stopping can help mitigate overfitting in DNN models, but BERT’s transfer learning approach provides a more robust and scalable solution.
 
 ## License
 
